@@ -5,7 +5,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-//gfg
+
 namespace Api
 {
     public class AzureFuntionWeatherForecast
