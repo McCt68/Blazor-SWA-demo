@@ -41,7 +41,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        
+        // Retrieving the data by making a Http request using the AzureFunction from the api
+        try
+        {
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/WeatherForecast") ?? new WeatherForecast[] { };
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
     }
 
     public class WeatherForecast
