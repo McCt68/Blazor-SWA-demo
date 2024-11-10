@@ -1,6 +1,73 @@
-﻿@page "/randomfood"
-<h3>RandomFood</h3>
+﻿@page "/ugensmenu"
+@using System.Globalization
+
+
+@inject HttpClient Http
+
+<PageTitle>Ugens Menu</PageTitle>
+
+<h3>Ugens Menu</h3>
+
+<p>Disse Data kommer ved brug af en AzureFunction.</p>
+
+@if (dagensRet == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Dato</th>                
+                <th>UgeDag</th>                
+                <th>Dagens Ret</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ret in dagensRet)
+            {
+                <tr>
+                    <td>@ret.Dato.ToShortDateString()</td>
+                    <td>@ret.UgeDag</td>
+                    <td>@ret.DDagensRet</td>                                     
+                                                        
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
+    private DagensRet[]? dagensRet;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        // Retrieving the data by making a Http request using the AzureFunction from the api
+        try
+        {
+            dagensRet = await Http.GetFromJsonAsync<DagensRet[]>("/api/UgensMenu") ?? new DagensRet[] { };
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+    }
+
+    public class DagensRet
+    {
+        public DateOnly Dato{ get; set; }
+        public string DDagensRet { get; set; }       
+
+        public string UgeDag
+        {            
+            get
+            {
+                CultureInfo daDK = new CultureInfo("da-DK");
+                return Dato.ToString("dddd", daDK);                              
+            }
+        }
+    }
 
 }
