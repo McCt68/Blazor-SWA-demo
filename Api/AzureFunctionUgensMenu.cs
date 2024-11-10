@@ -32,7 +32,7 @@ namespace Api
             // Opret array af 7 retter
             var ugensMenu = Enumerable.Range(1, 7).Select(index => new DagensRet
             {                
-                DDagensRet = FindTilfældigRet(valgteRetter),
+                DDagensRet = FindTilfaeldigRet(valgteRetter),
                 Dato = DateOnly.FromDateTime(DateTime.Now.AddDays(index)) 
                  
             }).ToArray();
@@ -42,7 +42,7 @@ namespace Api
             return response;                                
         }
 
-        private string FindTilfældigRet(HashSet<string> valgteRetter)
+        private string FindTilfaeldigRet(HashSet<string> valgteRetter)
         {
             while (true)
             {
