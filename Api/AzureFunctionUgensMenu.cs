@@ -66,19 +66,7 @@ namespace Api
             public DateOnly Dato { get; set; }
 
             // Maybe i can do as i did with dato for culture to work
-            public string MadRet { get; set; }
-            //public string MadRet
-            //{
-            //    get
-            //    {
-            //        CultureInfo daDk = new CultureInfo("da-Dk");
-            //        return string.Format(daDk, "{0:G}", MadRet); // ToString("G",daDk);
-            //    }
-            //    set
-            //    {
-            //        MadRet = value;
-            //    }
-            //}
+            public string MadRet { get; set; }            
 
             public string UgeDag
             {                

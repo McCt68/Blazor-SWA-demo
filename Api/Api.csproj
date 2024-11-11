@@ -5,6 +5,12 @@
     <OutputType>Exe</OutputType>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- Set default encoding to UTF-8 -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CodePage>65001</CodePage>
+    <!-- UTF-8 encoding -->
+    
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
