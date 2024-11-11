@@ -17,7 +17,7 @@ jobs:
     # Test with localization
     env:
         DOTNET_CLI_LAUNGUAGE: da
-        LANG: eda_DK.UTF-8
+        LANG: da_DK.UTF-8
     # End Test
     steps:
       - uses: actions/checkout@v3
