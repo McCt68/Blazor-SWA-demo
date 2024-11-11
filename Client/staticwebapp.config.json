@@ -1,6 +1,10 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html"
+  },
+  "mimeTypes": {
+    ".json": "application/json; charset=utf-8",
+    ".html": "text/html; charset=utf-8"
   }
 }
 
