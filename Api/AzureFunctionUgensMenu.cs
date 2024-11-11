@@ -52,11 +52,11 @@ namespace Api
         {
             while (true)
             {
-                var tilfældigRet = _dagsretter[new Random().Next(_dagsretter.Length)];
-                if (!valgteRetter.Contains(tilfældigRet))
+                var tilfaeldigRet = _dagsretter[new Random().Next(_dagsretter.Length)];
+                if (!valgteRetter.Contains(tilfaeldigRet))
                 {
-                    valgteRetter.Add(tilfældigRet);
-                    return tilfældigRet;
+                    valgteRetter.Add(tilfaeldigRet);
+                    return tilfaeldigRet;
                 }
             }
         }        
