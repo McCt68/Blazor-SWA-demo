@@ -6,6 +6,8 @@
 
 <PageTitle>Ugens Menu</PageTitle>
 
+<h1>TÆÆÆST ØJEBLIK</h1>
+
 <h3>Ugens Menu</h3>
 
 <p>Disse Data kommer ved brug af en AzureFunction.</p>
@@ -30,7 +32,7 @@ else
                 <tr>
                     <td>@ret.Dato.ToShortDateString()</td>
                     <td>@ret.UgeDag</td>
-                    <td>@ret.DDagensRet</td>                                     
+                    <td>@ret.MadRet</td>                                     
                                                         
                 </tr>
             }
@@ -43,6 +45,10 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+
+        // test culture
+        CultureInfo.CurrentCulture = new CultureInfo("da-DK");
+        CultureInfo.CurrentUICulture = new CultureInfo("da-DK");
 
         // Retrieving the data by making a Http request using the AzureFunction from the api
         try
@@ -58,7 +64,7 @@ else
     public class DagensRet
     {
         public DateOnly Dato{ get; set; }
-        public string DDagensRet { get; set; }       
+        public string MadRet { get; set; }       
 
         public string UgeDag
         {            

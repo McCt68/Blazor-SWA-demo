@@ -3,13 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using System.Threading;
 using System.Globalization;
 using System.Net;
 
+//// testing local culture to danish
+//string culture = "da-DK";
+//CultureInfo cultureInfo = new CultureInfo(culture);
+//Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
 namespace Api
-{
-    public class AzureFunctionUgensMenu
-    {
+{    
+    public class AzureFunctionUgensMenu   {
+       
         private readonly ILogger<AzureFunctionUgensMenu> _logger;
 
         private readonly string[] _dagsretter = new string[]
@@ -32,12 +38,12 @@ namespace Api
             // Opret array af 7 retter
             var ugensMenu = Enumerable.Range(1, 7).Select(index => new DagensRet
             {                
-                DDagensRet = FindTilfaeldigRet(valgteRetter),
+                MadRet = FindTilfaeldigRet(valgteRetter),
                 Dato = DateOnly.FromDateTime(DateTime.Now.AddDays(index)) 
                  
             }).ToArray();
 
-            var response = req.CreateResponse(HttpStatusCode.OK);
+            var response = req.CreateResponse(HttpStatusCode.OK);            
             response.WriteAsJsonAsync(ugensMenu);
             return response;                                
         }
@@ -46,11 +52,11 @@ namespace Api
         {
             while (true)
             {
-                var randomDish = _dagsretter[new Random().Next(_dagsretter.Length)];
-                if (!valgteRetter.Contains(randomDish))
+                var tilfældigRet = _dagsretter[new Random().Next(_dagsretter.Length)];
+                if (!valgteRetter.Contains(tilfældigRet))
                 {
-                    valgteRetter.Add(randomDish);
-                    return randomDish;
+                    valgteRetter.Add(tilfældigRet);
+                    return tilfældigRet;
                 }
             }
         }        
@@ -58,7 +64,21 @@ namespace Api
         public class DagensRet
         {            
             public DateOnly Dato { get; set; }
-            public string DDagensRet { get; set; }           
+
+            // Maybe i can do as i did with dato for culture to work
+            public string MadRet { get; set; }
+            //public string MadRet
+            //{
+            //    get
+            //    {
+            //        CultureInfo daDk = new CultureInfo("da-Dk");
+            //        return string.Format(daDk, "{0:G}", MadRet); // ToString("G",daDk);
+            //    }
+            //    set
+            //    {
+            //        MadRet = value;
+            //    }
+            //}
 
             public string UgeDag
             {                
